@@ -8,7 +8,8 @@
     function BlogService($http, $q) {
         var srv = {
            
-            ScrapeArticle: _scrapeArticle
+            ScrapeArticle: _scrapeArticle,
+            GetPrices: _getPrices
          
 
         }
@@ -18,7 +19,7 @@
         function _scrapeArticle() {
             return $http.post("/api/blog/articles/")
                 .then(function (response) {
-                    console.log("article service.js check");
+                    //console.log("article service.js check");
                     return response.data;
                 })
                 .catch(function (err) {
@@ -28,7 +29,17 @@
 
         }
 
-       
+        function _getPrices() {
+            return $http.get('https://api.coinmarketcap.com/v1/ticker/?limit=10')
+               
+                .then(function (response) {
+                    return response.data;
+                })
+                .catch(function (err) {
+                    return $q.reject(err);
+                })
+        }
+    
     }
 
 })();

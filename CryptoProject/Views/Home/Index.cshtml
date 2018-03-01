@@ -2,36 +2,118 @@
     ViewBag.Title = "Index";
     Layout = null;
 }
+<style>
+    .cPrices {
+        border: 10px solid hsla(0,0%,100%,.5);
+        background: white;
+        background-clip: padding-box;
+        position: relative;
+    }
+
+    .article {
+        border: 10px solid hsla(0,0%,100%,.5);
+        background: white;
+        background-clip: padding-box;
+        position: relative;
+        width: 800px;
+        height: 800px;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .header {
+        background: #9cb8b3;
+        width: auto;
+        height: 500px;
+    }
+
+    h1 {
+        font: 600 1.5em/1 'Raleway', sans-serif;
+        color: rgba(0,0,0,.5);
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: .5em;
+        position: relative;
+        top: 25%;
+        width: 100%;
+    }
+
+    span, span:after {
+        font-weight: 900;
+        color: #efedce;
+        white-space: nowrap;
+        display: inline-block;
+        position: relative;
+        letter-spacing: .1em;
+        padding: .2em 0 .25em 0;
+    }
+
+    span {
+        font-size: 4em;
+        z-index: 100;
+        text-shadow: .04em .04em 0 #9cb8b3;
+    }
+
+        span:after {
+            content: attr(data-shadow-text);
+            color: rgba(0,0,0,.35);
+            text-shadow: none;
+            position: absolute;
+            left: .0875em;
+            top: .0875em;
+            z-index: -1;
+            -webkit-mask-image: url(https://f.cl.ly/items/1t1C0W3y040g1J172r3h/mask.png);
+        }
+</style>
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: lightgrey;
-        }
-    </style>
+
 </head>
 
 <body ng-app="CryptoApp">
 
+
+
+
+    <div class="header">
+        <h1>WebScraping<br><span data-shadow-text="WebScraping">CRYPTO NEWS</span><br> Test App</h1>
+
+    </div>
+
+
     <div ng-controller="blogController as bc">
 
+        <div>
 
-        <div class="jumbotron text-center">
-            <h1>Crypto News</h1>
-            
+
+            <div style="padding: 50px;" class="container-fluid">
+                <div class="row">
+
+                    <h1>Current Prices of the top 10 coins</h1>
+                    <div class=" col-md-2 cPrices" ng-repeat="price in bc.prices">
+                        <h3><b>Name:</b> {{price.name}} </h3>
+                        <h3 style="color:blue"><b>Rank: </b>{{price.rank}}</h3>
+                        <h3 style="color:blue"><b>Price: </b>{{price.price_usd}}</h3>
+                    </div>
+
+
+
+                </div>
+            </div>
         </div>
 
-        <div class="container-fluid">
+        <div class="container-fluid" style="padding: 50px;">
             <div class="row">
-                
-                    <div class="col-md-5" ng-repeat="itm in bc.articleModel">
-                        <p ng-bind-html="itm"></p>
-                    
+                <h1>Latest Crypto News</h1>
+                <div class="col-md-5 article" ng-repeat="itm in bc.articleModel">
+                    <p ng-bind-html="itm"></p>
+
                 </div>
             </div>
         </div>
     </div>
+
 
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script src="~/Scripts/angular.js"></script>
@@ -41,5 +123,7 @@
     <script src="~/Scripts/App/Controller/blogController.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+
+
 </body>
